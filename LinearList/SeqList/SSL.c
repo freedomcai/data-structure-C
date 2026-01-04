@@ -67,4 +67,27 @@ bool ListDelete(SSeqList* L, int i){
   return true;
 }
 
+DataType GetElem(SSeqList L, int i){
+  //获取顺序表L的第i（1~size)个位置的元素
+  //如果获取成功，返回list[i-1]，否则返回0
+  if (i < 1 || i > L.size) {
+    printf("获取位置i非法!\n");
+    return 0;
+  }
+  return L.list[i-1];
+}
+
+int LocateElem(SSeqList L, DataType x){
+  //获取顺序表L（1~size）中的第1个位置等于x的元素
+  //如果获取成功，返回i，否则返回0
+  for(int i = 0;i < L.size;++i){
+    if(L.list[i] == x) return i+1;
+  }
+  return 0;
+}
+
+void PrintList(SSeqList L){
+  for(int j = 0;j < L.size;++j) printf("%d ", (int)L.list[j]);
+}
+
 
