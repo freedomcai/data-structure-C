@@ -1,14 +1,14 @@
 #include "SSL.h"
 #include <stdio.h>
 
-void InitList(SSeqList* L){
+void SSL_InitList(SSeqList* L){
   for(int i = 0;i < MaxSize;++i){
     L->list[i] = 0;
   }
   L->size = 0;
 }
 
-bool ListInsert(SSeqList* L, int i, DataType x){
+bool SSL_ListInsert(SSeqList* L, int i, DataType x){
   //在顺序表L的第i（1~size + 1)个位置前插入元素x
   //如果插入成功，返回1，否则返回0
   if (L->size >= MaxSize) {
@@ -28,7 +28,7 @@ bool ListInsert(SSeqList* L, int i, DataType x){
   return true;
 }
 
-bool ListDeleteR(SSeqList* L, int i, DataType* x){
+bool SSL_ListDeleteR(SSeqList* L, int i, DataType* x){
   //删除顺序表L的第i（1~size)个位置的元素，并用x返回
   //如果删除成功，返回1，否则返回0
   if (L->size <= 0) {
@@ -48,7 +48,7 @@ bool ListDeleteR(SSeqList* L, int i, DataType* x){
   return true;
 }
 
-bool ListDelete(SSeqList* L, int i){
+bool SSL_ListDelete(SSeqList* L, int i){
   //删除顺序表L的第i（1~size)个位置的元素
   //如果删除成功，返回1，否则返回0
   if (L->size <= 0) {
@@ -67,7 +67,7 @@ bool ListDelete(SSeqList* L, int i){
   return true;
 }
 
-DataType GetElem(SSeqList L, int i){
+DataType SSL_GetElem(SSeqList L, int i){
   //获取顺序表L的第i（1~size)个位置的元素
   //如果获取成功，返回list[i-1]，否则返回0
   if (i < 1 || i > L.size) {
@@ -77,7 +77,7 @@ DataType GetElem(SSeqList L, int i){
   return L.list[i-1];
 }
 
-int LocateElem(SSeqList L, DataType x){
+int SSL_LocateElem(SSeqList L, DataType x){
   //获取顺序表L（1~size）中的第1个位置等于x的元素
   //如果获取成功，返回i，否则返回0
   for(int i = 0;i < L.size;++i){
@@ -86,7 +86,7 @@ int LocateElem(SSeqList L, DataType x){
   return 0;
 }
 
-void PrintList(SSeqList L){
+void SSL_PrintList(SSeqList L){
   for(int j = 0;j < L.size;++j) printf("%d ", (int)L.list[j]);
 }
 
