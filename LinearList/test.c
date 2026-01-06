@@ -91,16 +91,17 @@ void test03(){
     cur = cur->next;
   }
 
-  LL_InsertPriorNode(cur, 8);
-  LL_InsertNextNode(cur, 10);
-
-  cur = l3;
-  while(cur != NULL){
-    printf("%d", cur->data);
-    cur = cur->next;
-  }
-
+//  LL_InsertPriorNode(cur, 8);
+//  LL_InsertNextNode(cur, 10);
+//
+//  cur = l3;
+//  while(cur != NULL){
+//    printf("%d", cur->data);
+//    cur = cur->next;
+//  }
+  
   printf("\n");
+
 }
 
 
