@@ -44,6 +44,65 @@ bool LL_ListInsert(LinkList* L, int i, DataType x){
   return LL_InsertNextNode(cur, x);
 }
 
+LinkList List_TailInsert(LinkList* L){
+  int x;
+  *L = (LinkList)malloc(sizeof(LNode));
+  (*L)->next = NULL;
+  LNode* s, *r = *L;
+
+  printf("input -9999 is break!\n");
+  scanf("%d", &x);
+  while(x != -9999){
+    s = (LNode*)malloc(sizeof(LNode));
+    s->data = x;
+    r->next = s;
+    r = s;
+    scanf("%d", &x);
+  }
+  r->next = NULL;
+  return *L;
+}
+
+LinkList List_HeadInsert(LinkList* L){
+  int x;
+  *L = (LinkList)malloc(sizeof(LNode));
+  (*L)->next = NULL;
+  LNode* s;
+
+  printf("input -9999 is break!\n");
+  scanf("%d", &x);
+  while(x != -9999){
+    s = (LNode*)malloc(sizeof(LNode));
+    s->data = x;
+    s->next = (*L)->next;
+    (*L)->next = s;
+    scanf("%d", &x);
+  }
+  return *L; 
+}
+
+//LinkList List_reverse(LinkList L){
+//  //基于头插法思想实现逆置函数
+//  if(L == NULL || L->next == NULL){
+//    return L;
+//  }
+//  // 创建新的头节点（临时）
+//  LinkList newHead = (LinkList)malloc(sizeof(LNode));
+//  newHead->next = NULL;
+//
+//  LNode* cur = L->next;
+//  LNode* tmp;
+//  while(cur != NULL){
+//    tmp = cur->next;
+//    cur->next = newHead->next;
+//    newHead->next = cur;
+//    cur = tmp;
+//  }
+//  L->next = newHead->next;
+//  free(newHead);
+//  return L;
+//}
+
 bool LL_InsertNextNode(LNode* p, DataType x){
   if(p == NULL){
     printf("节点不存在!\n");
@@ -173,7 +232,28 @@ int LL_Length(LinkList L){
   return len;
 }
 
+void LL_PrintList(LinkList L){
+  LNode* cur = L->next;
+  while(cur != NULL){
+    printf("%d ", cur->data);
+    cur = cur->next;
+  }
+  printf("\n");
+  printf("LL_Length is %d\n", LL_Length(L));
+}
 
-
+void LL_reverseList(LinkList L){
+  if(L == NULL || L->next == NULL){
+    return;
+  }
+  LNode* pre = NULL, *cur = L->next;
+  while(cur != NULL){
+    LNode* tmp = cur->next;
+    cur->next = pre;
+    pre = cur;
+    cur = tmp;
+  }
+  L->next = pre;
+}
 
 

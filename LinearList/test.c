@@ -80,28 +80,18 @@ void test02(){
 
 void test03(){
   LinkList l3;
-  LL_InitList(&l3);
-  for(int i = 1;i < 10;++i){
-    LL_ListInsert(&l3, i, i);
-  }
-  
-  LNode* cur = l3;
-  while(cur->next != NULL){
-    printf("%d", cur->data);
-    cur = cur->next;
-  }
+  List_TailInsert(&l3);
+  LL_PrintList(l3);
 
-//  LL_InsertPriorNode(cur, 8);
-//  LL_InsertNextNode(cur, 10);
-//
-//  cur = l3;
-//  while(cur != NULL){
-//    printf("%d", cur->data);
-//    cur = cur->next;
-//  }
-  
+  LinkList l4;
+  List_HeadInsert(&l4);
+  LL_PrintList(l4);
+  //LinkList l5 = List_reverse(l4);
+  //LL_PrintList(l5);
+  LL_reverseList(l4);
+  LL_PrintList(l4);
+
   printf("\n");
-
 }
 
 
