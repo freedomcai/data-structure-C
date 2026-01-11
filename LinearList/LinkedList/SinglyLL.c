@@ -44,7 +44,7 @@ bool LL_ListInsert(LinkList* L, int i, DataType x){
   return LL_InsertNextNode(cur, x);
 }
 
-LinkList List_TailInsert(LinkList* L){
+LinkList LL_ListTailInsert(LinkList* L){
   int x;
   *L = (LinkList)malloc(sizeof(LNode));
   (*L)->next = NULL;
@@ -63,7 +63,7 @@ LinkList List_TailInsert(LinkList* L){
   return *L;
 }
 
-LinkList List_HeadInsert(LinkList* L){
+LinkList LL_ListHeadInsert(LinkList* L){
   int x;
   *L = (LinkList)malloc(sizeof(LNode));
   (*L)->next = NULL;
