@@ -1,78 +1,91 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "LL.h"
+#include "CLL.h"
 
-bool LL_InitList(LinkList* L){
-  *L = (LNode*)malloc(sizeof(LNode));
+bool CLL_InitList(CLinkList* L){
+  *L = (CLNode*)malloc(sizeof(CLNode));
   if(*L == NULL){
     printf("内存分配失败!\n");
     return false;
   }
-  (*L)->next = NULL;
+  (*L)->next = *L;
   return true;
 }
 
-bool LL_isEmpty(LinkList L){
-  if(L->next == NULL) return true;
+bool CLL_isEmpty(CLinkList L){
+  if(L->next == L) return true;
   else return false;
 }
 
-bool LL_ListInsert(LinkList* L, int i, DataType x){
+bool CLL_isTail(CLinkList L, CLNode* p){
+  if(p->next == L) return true;
+  else return false;
+}
+
+CLNode* CLL_ReturnTail(CLinkList L){
+  CLNode* cur = L;
+  while(!CLL_isTail(L, cur)){
+    cur = cur->next;
+  }
+  return cur;
+}
+
+bool CLL_ListInsert(CLinkList* L, int i, DataType x){
   //在单链表L的第i（1~L's size)个位置插入元素x
   //如果插入成功，返回1，否则返回0
   if(i < 1){
     printf("插入位置i非法!\n");
     return false;
   }
-//  LNode* cur = *L;
+//  CLNode* cur = *L;
 //  int j = 0;
 //  while(cur != NULL && j < i - 1){
 //    cur = cur->next;
 //    ++j;
 //  }
-  if(i == 1) LL_InsertNextNode(*L, x);
-  LNode* cur = LL_GetElem(*L, i-1);
+  if(i == 1) CLL_InsertNextNode(*L, x);
+  CLNode* cur = CLL_GetElem(*L, i-1);
 //  if(cur == NULL){
 //    printf("插入位置i非法!\n");
 //    return false;
 //  }
-//  LNode* newNode = (LNode*)malloc(sizeof(LNode));
+//  CLNode* newNode = (CLNode*)malloc(sizeof(CLNode));
 //  newNode->data = x;
 //  newNode->next = cur->next;
 //  cur->next = newNode;
 //  return true;
-  return LL_InsertNextNode(cur, x);
+  return CLL_InsertNextNode(cur, x);
 }
 
-LinkList LL_ListTailInsert(LinkList* L){
+CLinkList CLL_ListTailInsert(CLinkList* L){
   int x;
-  *L = (LinkList)malloc(sizeof(LNode));
-  (*L)->next = NULL;
-  LNode* s, *r = *L;
+  *L = (CLinkList)malloc(sizeof(CLNode));
+  (*L)->next = *L;
+  CLNode* s, *r = *L;
 
   printf("input -9999 is break!\n");
   scanf("%d", &x);
   while(x != -9999){
-    s = (LNode*)malloc(sizeof(LNode));
+    s = (CLNode*)malloc(sizeof(CLNode));
     s->data = x;
     r->next = s;
     r = s;
     scanf("%d", &x);
   }
-  r->next = NULL;
+  r->next = *L;
   return *L;
 }
 
-LinkList LL_ListHeadInsert(LinkList* L){
+CLinkList CLL_ListHeadInsert(CLinkList* L){
   int x;
-  *L = (LinkList)malloc(sizeof(LNode));
-  (*L)->next = NULL;
-  LNode* s;
+  *L = (CLinkList)malloc(sizeof(CLNode));
+  (*L)->next = *L;
+  CLNode* s;
 
   printf("input -9999 is break!\n");
   scanf("%d", &x);
   while(x != -9999){
-    s = (LNode*)malloc(sizeof(LNode));
+    s = (CLNode*)malloc(sizeof(CLNode));
     s->data = x;
     s->next = (*L)->next;
     (*L)->next = s;
@@ -81,18 +94,18 @@ LinkList LL_ListHeadInsert(LinkList* L){
   return *L; 
 }
 
-//LinkList List_reverse(LinkList L){
+//CLinkList CList_reverse(CLinkList L){
 //  //基于头插法思想实现逆置函数
-//  if(L == NULL || L->next == NULL || L->next->next == NULL){
+//  if(L == L || L->next == L || L->next->next == L){
 //    return L;
 //  }
 //  // 创建新的头节点（临时）
-//  LinkList newHead = (LinkList)malloc(sizeof(LNode));
+//  LinkList newHead = (CLinkList)malloc(sizeof(CLNode));
 //  newHead->next = NULL;
 //
-//  LNode* cur = L->next;
-//  LNode* tmp;
-//  while(cur != NULL){
+//  CLNode* cur = L->next;
+//  CLNode* tmp;
+//  while(cur != L){
 //    tmp = cur->next;
 //    cur->next = newHead->next;
 //    newHead->next = cur;
@@ -103,12 +116,12 @@ LinkList LL_ListHeadInsert(LinkList* L){
 //  return L;
 //}
 
-bool LL_InsertNextNode(LNode* p, DataType x){
+bool CLL_InsertNextNode(CLNode* p, DataType x){
   if(p == NULL){
     printf("节点不存在!\n");
     return false;
   }
-  LNode* newNode = (LNode*)malloc(sizeof(LNode));
+  CLNode* newNode = (CLNode*)malloc(sizeof(CLNode));
   if(newNode == NULL){
     printf("内存分配失败!\n");
     return false;
@@ -119,136 +132,140 @@ bool LL_InsertNextNode(LNode* p, DataType x){
   return true;
 }
 
-bool LL_InsertPriorNode(LNode* p, DataType x){
+bool CLL_InsertPriorNode(CLNode* p, DataType x){
   if(p == NULL){
     printf("节点不存在!\n");
     return false;
   }
-  LNode* newNode = (LNode*)malloc(sizeof(LNode));
-  if(newNode == NULL){
-    printf("内存分配失败!\n");
-    return false;
+  CLNode* cur = p->next;
+  while(cur->next != p){
+    cur = cur->next;
   }
-  newNode->data = p->data;
-  newNode->next = p->next;
-  p->next = newNode;
-  p->data = x;
+//  CLNode* newNode = (CLNode*)malloc(sizeof(CLNode));
+//  if(newNode == NULL){
+//    printf("内存分配失败!\n");
+//    return false;
+//  }
+//  newNode->data = x;
+//  newNode->next = p;
+//  cur->next = newNode;
+  CLL_InsertNextNode(cur, x);
   return true;
 }
 
-bool LL_ListDeleteR(LinkList* L, int i, DataType* x){
+bool CLL_ListDeleteR(CLinkList* L, int i, DataType* x){
   //在单链表L的第i（1~L's size)个位置删除元素x
   //如果删除成功，返回1，否则返回0
   if(i < 1){
     printf("插入位置i非法!\n");
     return false;
   }
-//  LNode* cur = *L;
+//  CLNode* cur = *L;
 //  int j = 0;
-//  while(cur != NULL && j < i - 1){
+//  while(cur != *L && j < i - 1){
 //    cur = cur->next;
 //    ++j;
 //  }
-  LNode* cur = LL_GetElem(*L, i-1);
-  if(cur == NULL || cur->next == NULL){
+  CLNode* cur = CLL_GetElem(*L, i-1);
+  if(cur == *L || cur->next == *L){
     printf("删除位置i非法!\n");
     return false;
   }
-  LNode* tmp = cur->next;
+  CLNode* tmp = cur->next;
   *x = tmp->data;
   cur->next = tmp->next;
   free(tmp);
   return true;
 }
 
-bool LL_ListDelete(LinkList* L, int i){
+bool CLL_ListDelete(CLinkList* L, int i){
   //在单链表L的第i（1~L's size)个位置删除元素x
   //如果删除成功，返回1，否则返回0
   if(i < 1){
     printf("插入位置i非法!\n");
     return false;
   }
-//  LNode* cur = *L;
+//  CLNode* cur = *L;
 //  int j = 0;
-//  while(cur != NULL && j < i - 1){
+//  while(cur != *L && j < i - 1){
 //    cur = cur->next;
 //    ++j;
 //  }
-  LNode* cur = LL_GetElem(*L, i-1);
-  if(cur == NULL || cur->next == NULL){
+  CLNode* cur = CLL_GetElem(*L, i-1);
+  if(cur == *L || cur->next == *L){
     printf("删除位置i非法!\n");
     return false;
   }
-  LNode* tmp = cur->next;
+  CLNode* tmp = cur->next;
   cur->next = tmp->next;
   free(tmp);
   return true;
 }
 
-//不能删除最后一个元素
-bool LL_DeleteNode(LNode* p){
+bool CLL_DeleteNode(CLinkList L, CLNode* p){
   if(p == NULL){
     printf("节点不存在!\n");
     return false;
   }
-  LNode* tmp = p->next;
-  if(tmp != NULL){
-    p->data = tmp->data;
-    p->next = tmp->next;
+  CLNode* cur = p->next;
+  while(cur->next != p){
+    cur = cur->next;
   }
-  free(tmp);
+  cur->next = L;
+  free(p);
   return true;
 }
 
-LNode* LL_GetElem(LinkList L, int i){
+CLNode* CLL_GetElem(CLinkList L, int i){
   //在单链表L的第i（1~L's size)个位置查找元素x
   //如果查找成功，返回LNode*，否则返回NULL
   if(i < 1){
     printf("插入位置i非法!\n");
     return NULL;
   }
-  LNode* cur = L;
+  CLNode* cur = L;
   int j = 0;
-  while(cur != NULL && j < i){
+  while(cur != L && j < i){
     cur = cur->next;
     ++j;
   }
   return cur;
 }
 
-LNode* LL_LocateElem(LinkList L, DataType x){
-  LNode* cur = L->next;
-  while(cur != NULL && cur->data != x) cur = cur->next;
+
+CLNode* CLL_LocateElem(CLinkList L, DataType x){
+  CLNode* cur = L->next;
+  while(cur != L && cur->data != x) cur = cur->next;
   return cur;
 }
 
-int LL_Length(LinkList L){
+int CLL_Length(CLinkList L){
   int len = 0;
-  LNode* cur = L;
-  while(cur->next != NULL){
+  CLNode* cur = L;
+  while(cur->next != L){
     cur = cur->next;
     ++len;
   }
   return len;
 }
 
-void LL_PrintList(LinkList L){
-  LNode* cur = L->next;
-  while(cur != NULL){
+void CLL_PrintList(CLinkList L){
+  CLNode* cur = L->next;
+  while(cur != L){
     printf("%d ", cur->data);
     cur = cur->next;
   }
   printf("\n");
-  printf("LL_Length is %d\n", LL_Length(L));
+  printf("CLL_Length is %d\n", CLL_Length(L));
 }
 
-void LL_reverseList(LinkList L){
-  if(L == NULL || L->next == NULL || L->next->next == NULL){
+void CLL_reverseList(CLinkList L){
+  if(L == NULL || L->next == L || L->next->next == L){
     return;
   }
-  LNode* pre = NULL, *cur = L->next;
-  while(cur != NULL){
-    LNode* tmp = cur->next;
+  CLNode* pre = L, *cur = L->next;
+  while(cur != L){
+    CLNode* tmp = cur->next;
     cur->next = pre;
     pre = cur;
     cur = tmp;
