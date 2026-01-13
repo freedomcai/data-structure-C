@@ -3,18 +3,22 @@
 #include "DSL.h"
 #include "LL.h"
 #include "DLL.h"
+#include "CLL.h"
 
 //void test01();
 //void test02();
 //void test03();
-void test04();
+//void test04();
+
+void test05();
 
 int main(){
   //test01();
   //test02();
   //test03();
-  
-  test04();
+  //test04();
+
+  test05();
 
   printf("\n");
   return 0;
@@ -97,20 +101,37 @@ int main(){
 //
 //  printf("\n");
 //}
-//
-//
 
-void test04(){
-  DLinkList l4;
-  DLL_ListTailInsert(&l4);
-  DLL_BackwardTraversal(l4);
+
+//void test04(){
+//  DLinkList l4;
+//  DLL_ListTailInsert(&l4);
+//  DLL_BackwardTraversal(l4);
+//  printf("\n");
+//  DNode* tmp = DLL_GetNode(l4, 10);
+//  printf("%d\n", tmp->data);
+//  DLL_BackwardTraversal(tmp);
+//  printf("\n");
+//  DLL_ForwardTraversal(tmp);
+//}
+
+void test05(){
+  CLinkList l5;
+  CLL_ListTailInsert(&l5);
+  CLL_PrintList(l5);
+  CLNode* cur = CLL_ReturnTail(l5);
+  printf("%d\n", cur->data);
+
+  CLinkList l6;
+  CLL_ListHeadInsert(&l6);
+  CLL_PrintList(l6);
+  cur = CLL_ReturnTail(l6);
+  printf("%d\n", cur->data);
+  
+  CLL_reverseList(l6);
+  CLL_PrintList(l6);
+  cur = CLL_ReturnTail(l6);
+  printf("%d\n", cur->data);
   printf("\n");
-  DNode* tmp = DLL_GetNode(l4, 10);
-  printf("%d\n", tmp->data);
-  DLL_BackwardTraversal(tmp);
-  printf("\n");
-  DLL_ForwardTraversal(tmp);
 }
-
-
 
