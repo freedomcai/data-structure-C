@@ -75,7 +75,7 @@ bool DLL_DeleteNextNode(DNode* p){
   DNode* q = p->next;
   p->next = q->next;
   if(q->next != NULL) q->next->prior = p;
-  free(p);
+  free(q);
   return true;
 }
 

@@ -4,21 +4,24 @@
 #include "LL.h"
 #include "DLL.h"
 #include "CLL.h"
+#include "CDLL.h"
 
 //void test01();
 //void test02();
 //void test03();
 //void test04();
+//void test05();
 
-void test05();
+void test06();
 
 int main(){
   //test01();
   //test02();
   //test03();
   //test04();
+  //test05();
 
-  test05();
+  test06();
 
   printf("\n");
   return 0;
@@ -115,23 +118,37 @@ int main(){
 //  DLL_ForwardTraversal(tmp);
 //}
 
-void test05(){
-  CLinkList l5;
-  CLL_ListTailInsert(&l5);
-  CLL_PrintList(l5);
-  CLNode* cur = CLL_ReturnTail(l5);
-  printf("%d\n", cur->data);
+//void test05(){
+//  CLinkList l5;
+//  CLL_ListTailInsert(&l5);
+//  CLL_PrintList(l5);
+//  CLNode* cur = CLL_ReturnTail(l5);
+//  printf("%d\n", cur->data);
+//
+//  CLinkList l6;
+//  CLL_ListHeadInsert(&l6);
+//  CLL_PrintList(l6);
+//  cur = CLL_ReturnTail(l6);
+//  printf("%d\n", cur->data);
+//  
+//  CLL_reverseList(l6);
+//  CLL_PrintList(l6);
+//  cur = CLL_ReturnTail(l6);
+//  printf("%d\n", cur->data);
+//  printf("\n");
+//}
 
-  CLinkList l6;
-  CLL_ListHeadInsert(&l6);
-  CLL_PrintList(l6);
-  cur = CLL_ReturnTail(l6);
-  printf("%d\n", cur->data);
-  
-  CLL_reverseList(l6);
-  CLL_PrintList(l6);
-  cur = CLL_ReturnTail(l6);
-  printf("%d\n", cur->data);
+void test06(){
+  CDLinkList l6;
+  CDLL_ListTailInsert(&l6);
+  CDLL_BackwardTraversal(l6, l6);
   printf("\n");
+  CDNode* tmp = CDLL_GetNode(l6, 10);
+  printf("%d\n", tmp->data);
+  CDLL_BackwardTraversal(l6, tmp);
+  printf("\n");
+  CDLL_ForwardTraversal(l6, tmp);
 }
+
+
 
