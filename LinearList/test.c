@@ -5,14 +5,16 @@
 #include "DLL.h"
 #include "CLL.h"
 #include "CDLL.h"
+#include "SLL.h"
 
 //void test01();
 //void test02();
 //void test03();
 //void test04();
 //void test05();
+//void test06();
 
-void test06();
+void test07();
 
 int main(){
   //test01();
@@ -20,8 +22,9 @@ int main(){
   //test03();
   //test04();
   //test05();
+  // test06();
 
-  test06();
+  test07();
 
   printf("\n");
   return 0;
@@ -138,17 +141,55 @@ int main(){
 //  printf("\n");
 //}
 
-void test06(){
-  CDLinkList l6;
-  CDLL_ListTailInsert(&l6);
-  CDLL_BackwardTraversal(l6, l6);
-  printf("\n");
-  CDNode* tmp = CDLL_GetNode(l6, 10);
-  printf("%d\n", tmp->data);
-  CDLL_BackwardTraversal(l6, tmp);
-  printf("\n");
-  CDLL_ForwardTraversal(l6, tmp);
-}
+//void test06(){
+//  CDLinkList l6;
+//  CDLL_ListTailInsert(&l6);
+//  CDLL_BackwardTraversal(l6, l6);
+//  printf("\n");
+//  CDNode* tmp = CDLL_GetNode(l6, 10);
+//  printf("%d\n", tmp->data);
+//  CDLL_BackwardTraversal(l6, tmp);
+//  printf("\n");
+//  CDLL_ForwardTraversal(l6, tmp);
+//}
 
+void test07(){
+  SLinkList L;
+  SLL_InitList(&L);
+  
+  printf("初始状态:\n");
+  SLL_Print(&L);
+  SLL_PrintAvail(&L);
+  printf("\n");
+  
+  // 测试插入
+  SLL_ListInsert(&L, 1, 10);
+  SLL_ListInsert(&L, 2, 20);
+  SLL_ListInsert(&L, 3, 30);
+  
+  printf("插入10,20,30后:\n");
+  SLL_Print(&L);
+  SLL_PrintAvail(&L);
+  printf("\n");
+  
+  // 测试查找
+  int pos = SLL_Locate(&L, 20);
+  printf("查找20: 下标=%d\n", pos);
+  printf("\n");
+  
+  // 测试删除
+  int val;
+  SLL_ListDeleteR(&L, 2, &val);
+  printf("删除第2个元素: %d\n", val);
+  SLL_Print(&L);
+  SLL_PrintAvail(&L);
+  printf("\n");
+  
+  // 再插入测试空间重用
+  SLL_ListInsert(&L, 2, 40);
+  printf("在位置2插入40后:\n");
+  SLL_Print(&L);
+  SLL_PrintAvail(&L);
+}
 
 
