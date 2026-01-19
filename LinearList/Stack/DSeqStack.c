@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "DSS.h"
 
+int cnt = 0;
+
 void DS_InitStack(DSqStack* S){
   DSL_InitList(S);
 }
@@ -25,6 +27,7 @@ bool DS_Push(DSqStack* S, DataType x){
       printf("内存分配失败!\n");
       exit(1);
     }
+    cnt++;
   }
   S->data[S->size++] = x;
   return true;
@@ -55,6 +58,9 @@ void DS_PrintStack(DSqStack S){
     if(DS_GetTop(S, &tmp)) printf("%d ", tmp);
     DS_Pop(&S);
   }
+  printf("\n");
+  printf("The expansion cnt is %d \n", cnt);
+  printf("The capacity is %d", S.capacity);
 }
 
 

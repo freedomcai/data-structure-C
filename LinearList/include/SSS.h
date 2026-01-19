@@ -1,3 +1,5 @@
+#ifndef SSS_H
+#define SSS_H
 #include "SSL.h"
 
 typedef struct{
@@ -17,3 +19,6 @@ bool SS_Pop(SSqStack* S);
 
 bool SS_GetTop(SSqStack S, DataType* x);
 void SS_PrintStack(SSqStack S);
+
+
+#endif

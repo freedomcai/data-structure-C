@@ -1,13 +1,16 @@
 #include <stdio.h>
 #include "SSS.h"
 #include "DSS.h"
+#include "LS.h"
 
 void test01();
 void test02();
+void test03();
 
 int main(){
-  //test01();
+  test01();
   test02();
+  test03();
 
   printf("\n");
   return 0;
@@ -28,6 +31,7 @@ void test01(){
     SS_Pop(&s1);
   }
   SS_PrintStack(s1);
+  printf("\n");
 }
 
 void test02(){
@@ -46,4 +50,22 @@ void test02(){
   }
   DS_PrintStack(s2);
 }
+
+void test03(){
+  LinkStack s3;
+  LS_InitStack(&s3);
+  for(int i = 1;i < 50;++i){
+    LS_Push(&s3, i);
+  }
+  LS_Push(&s3, 1);
+  LS_PrintStack(s3);
+  printf("\n");
+
+  int cnt = 45;
+  while(cnt--){
+    LS_Pop(&s3);
+  }
+  LS_PrintStack(s3);
+}
+
 

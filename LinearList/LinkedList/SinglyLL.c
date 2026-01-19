@@ -12,38 +12,6 @@ bool LL_InitList(LinkList* L){
   return true;
 }
 
-bool LL_isEmpty(LinkList L){
-  if(L->next == NULL) return true;
-  else return false;
-}
-
-bool LL_ListInsert(LinkList* L, int i, DataType x){
-  //在单链表L的第i（1~L's size)个位置插入元素x
-  //如果插入成功，返回1，否则返回0
-  if(i < 1){
-    printf("插入位置i非法!\n");
-    return false;
-  }
-//  LNode* cur = *L;
-//  int j = 0;
-//  while(cur != NULL && j < i - 1){
-//    cur = cur->next;
-//    ++j;
-//  }
-  if(i == 1) LL_InsertNextNode(*L, x);
-  LNode* cur = LL_GetElem(*L, i-1);
-//  if(cur == NULL){
-//    printf("插入位置i非法!\n");
-//    return false;
-//  }
-//  LNode* newNode = (LNode*)malloc(sizeof(LNode));
-//  newNode->data = x;
-//  newNode->next = cur->next;
-//  cur->next = newNode;
-//  return true;
-  return LL_InsertNextNode(cur, x);
-}
-
 LinkList LL_ListTailInsert(LinkList* L){
   int x;
   *L = (LinkList)malloc(sizeof(LNode));
@@ -80,6 +48,61 @@ LinkList LL_ListHeadInsert(LinkList* L){
   }
   return *L; 
 }
+
+bool LL_isEmpty(LinkList L){
+  if(L->next == NULL) return true;
+  else return false;
+}
+
+bool LL_ListInsert(LinkList* L, int i, DataType x){
+  //在单链表L的第i（1~L's size)个位置插入元素x
+  //如果插入成功，返回1，否则返回0
+  if(i < 1){
+    printf("插入位置i非法!\n");
+    return false;
+  }
+//  LNode* cur = *L;
+//  int j = 0;
+//  while(cur != NULL && j < i - 1){
+//    cur = cur->next;
+//    ++j;
+//  }
+  if(i == 1) LL_InsertNextNode(*L, x);
+  LNode* cur = LL_GetElem(*L, i-1);
+//  if(cur == NULL){
+//    printf("插入位置i非法!\n");
+//    return false;
+//  }
+//  LNode* newNode = (LNode*)malloc(sizeof(LNode));
+//  newNode->data = x;
+//  newNode->next = cur->next;
+//  cur->next = newNode;
+//  return true;
+  return LL_InsertNextNode(cur, x);
+}
+
+void HeadInsert(LinkList* L, DataType x){
+  LNode* s = (LNode*)malloc(sizeof(LNode));
+  s->data = x;
+  s->next = (*L)->next;
+  (*L)->next = s;
+}
+
+void HeadDeleteR(LinkList* L, DataType* x){
+  if((*L)->next == NULL) printf("It is already empty!");
+  LNode* tmp = (*L)->next;
+  *x = tmp->data;
+  (*L)->next = tmp->next;
+  free(tmp); 
+}
+
+void HeadDelete(LinkList* L){
+  if((*L)->next == NULL) printf("It is already empty!");
+  LNode* tmp = (*L)->next;
+  (*L)->next = tmp->next;
+  free(tmp);
+}
+
 
 //LinkList List_reverse(LinkList L){
 //  //基于头插法思想实现逆置函数
