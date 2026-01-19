@@ -1,3 +1,5 @@
+#ifndef DSS_H
+#define DSS_H
 #include "DSL.h"
 
 typedef DSeqList DSqStack;
@@ -14,3 +16,5 @@ bool DS_Pop(DSqStack* S);
 
 bool DS_GetTop(DSqStack S, DataType* x);
 void DS_PrintStack(DSqStack S);
+
+#endif
