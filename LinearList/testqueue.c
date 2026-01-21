@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "SSQ.h"
-
+#include "LQ.h"
 
 void test01();
 void test02();
@@ -8,7 +8,7 @@ void test03();
 
 int main(){
   test01();
-  //test02();
+  test02();
   //test03();
 
   printf("\n");
@@ -33,5 +33,25 @@ void test01(){
   printf("\n");
   printf("%d", q1.cnt);
 }
+
+void test02(){
+  LinkQueue q2;
+  LQ_InitQueue(&q2);
+  for(int i = 1;i < 101;++i){
+    LQ_Push(&q2, i);
+  }
+  LQ_PrintQueue(q2);
+  printf("\n");
+  while(!LQ_IsEmpty(q2)){
+    LQ_Pop(&q2);
+  }
+  for(int i = 1;i < 51;++i){
+    LQ_Push(&q2, i);
+  }
+  LQ_PrintQueue(q2);
+  printf("\n");
+  printf("%d", q2.size);
+}
+
 
 
