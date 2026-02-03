@@ -7,7 +7,7 @@ void test02();
 void test03();
 
 int main(){
-  test01();
+  //test01();
   test02();
   //test03();
 
@@ -51,6 +51,9 @@ void test02(){
   LQ_PrintQueue(q2);
   printf("\n");
   printf("%d", q2.size);
+  printf("first is %d, last is %d\n", 
+    LQ_GetFront(q2),
+    LQ_GetBack(q2));
 }
 
 
