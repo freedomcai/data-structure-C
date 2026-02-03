@@ -48,12 +48,12 @@ bool LQ_Pop(LinkQueue* Q){
 }
 
 DataType LQ_GetFront(LinkQueue Q){
-  if(Q.front->next == NULL) return 0;
+  if(Q.front->next == NULL) return -1;
   return Q.front->next->data;
 }
 
 DataType LQ_GetBack(LinkQueue Q){
-  if(Q.rear == Q.front) return 0;
+  if(Q.rear == Q.front) return -1;
   return Q.rear->data;
 }
 
