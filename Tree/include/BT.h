@@ -6,7 +6,7 @@ typedef int DataType;
 typedef struct BiTNode{
   DataType data;
   struct BiTNode *lchild, *rchild;
-}BiTNode, BiTree;
+}BiTNode, *BiTree;
 
 void visit(BiTree T);
 
